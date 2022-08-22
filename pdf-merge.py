@@ -2,7 +2,8 @@
 
 from PyPDF4 import PdfFileMerger
 from tkinter  import Tk
-from tkinter.filedialog import askopenfilename
+from tkinter import filedialog
+from tkinter.filedialog import askopenfilename, askdirectory
 
 Tk().withdraw()
 
@@ -12,7 +13,7 @@ filename = askopenfilename()
 filename2 = askopenfilename()
 
 pdfs = [filename, filename2]
-print(pdfs)
+# print(pdfs)
 
 answer = None
 while answer not in ("y", "n"):
@@ -37,8 +38,9 @@ for pdf in pdfs:
     merger.append(pdf)
 
 
+location = askdirectory(title="Save merged pdf")
+filename_merged = input("please enter a valid filename: ") + ".pdf"
 
-### add ability to choose filename and location
-merger.write("combined_hw.pdf")
+merger.write(location + "/" + filename_merged)
 
 merger.close()
